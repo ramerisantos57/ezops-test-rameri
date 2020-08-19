@@ -16,10 +16,6 @@ var Message = mongoose.model('Message', {
 
 var dbUrl = 'mongodb+srv://simple-chat-server:i8Ev93ApVr59Q@cluster0.a0ez5.mongodb.net/simple-chat?retryWrites=true&w=majority'
 
-app.get('/teste', (req, res) => {
-    res.send('teste')
-})
-
 app.get('/messages', (req, res) => {
     Message.find({}, (err, messages) => res.send(messages))
 })
@@ -50,6 +46,10 @@ app.post('/messages', async (req, res) => {
     finally {
         console.log('Message Posted')
     }
+})
+
+app.get('/teste', (req, res) => {
+    res.send('teste')
 })
 
 io.on('connection', () => console.log('a user is connected'))
