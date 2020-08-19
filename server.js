@@ -48,10 +48,6 @@ app.post('/messages', async (req, res) => {
     }
 })
 
-app.get('/teste', (req, res) => {
-    res.send('teste')
-})
-
 io.on('connection', () => console.log('a user is connected'))
 
 mongoose.connect(dbUrl, { useMongoClient: true }, (err) => console.log('mongodb connected', err))
