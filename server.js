@@ -14,7 +14,7 @@ var Message = mongoose.model('Message', {
     message: String
 })
 
-var dbUrl = 'mongodb+srv://teste:1aca4tra2fac@cluster0.a0ez5.mongodb.net/simple-chat?retryWrites=true&w=majority'
+var dbUrl = 'mongodb+srv://simple-chat-server:i8Ev93ApVr59Q@cluster0.a0ez5.mongodb.net/simple-chat?retryWrites=true&w=majority'
 
 app.get('/messages', (req, res) => {
     Message.find({}, (err, messages) => res.send(messages))
@@ -24,7 +24,6 @@ app.get('/messages/:user', (req, res) => {
     var user = req.params.user
     Message.find({ name: user }, (err, messages) => res.send(messages))
 })
-
 
 app.post('/messages', async (req, res) => {
     try {
@@ -49,14 +48,10 @@ app.post('/messages', async (req, res) => {
     }
 })
 
-io.on('connection', () => {
-    console.log('a user is connected')
-})
+io.on('connection', () => console.log('a user is connected'))
 
-mongoose.connect(dbUrl, { useMongoClient: true }, (err) => {
-    console.log('mongodb connected', err)
-})
+mongoose.connect(dbUrl, { useMongoClient: true }, (err) => console.log('mongodb connected', err))
 
 var server = http.listen(80, () => {
     console.log('server is running on port', server.address().port)
-});
+})
